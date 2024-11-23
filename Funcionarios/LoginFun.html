@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Funcionarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/LoginFun.css">  
+</head>
+<body>
+    <div class="container">
+        <!-- Contenedor del Login -->
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Login - Funcionarios</h1>
+                <p class="text-muted">Ingrese sus datos para continuar</p>
+            </div>
+            <!-- Formulario -->
+            <form id="loginForm">
+                <!-- Campo de Nombre -->
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                <!-- Campo de Apellido -->
+                <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+                <!-- Campo de Rut -->
+                <label for="Rut">RUT</label><br/>
+                <small>Formato: 12.345.678-9</small>
+                <input type="text" class="form-control" id="Rut" placeholder="" required>
+                <!-- Campo de Contraseña -->
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                <!-- Botón de Iniciar Sesión -->
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Manejo del formulario de login
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            // Obtener valores de los campos
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const rut = document.getElementById('Rut').value;
+            const password = document.getElementById('password').value;
+
+            console.log('Nombre:', nombre);
+            console.log('Apellido:', apellido);
+            console.log('Rut:', rut);
+            console.log('Contraseña:', password);
+
+            // Aquí puedes integrar la lógica de conexión con el backend
+            // Enviar datos al servidor para validar las credenciales
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

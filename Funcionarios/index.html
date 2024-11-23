@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Funcionarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Agenda Médica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Recaudación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="bg-light text-center py-5">
+        <h1 class="display-4">Dashboard de Funcionarios</h1>
+        <p class="lead">Gestione las operaciones del centro médico de forma eficiente.</p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Gestión de Agenda -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Gestión de Agenda</h5>
+                        <p class="card-text">Cree, modifique y administre las agendas médicas.</p>
+                        <a href="./Secretaria/Gestion_agenda.html" class="btn btn-primary">Ir a Agenda</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Recaudación -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Recaudación</h5>
+                        <p class="card-text">Registre pagos y genere comprobantes para los médicos.</p>
+                        <a href="#" class="btn btn-success">Ver Recaudación</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Informes -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Informes</h5>
+                        <p class="card-text">Genere informes de recaudación por rango de fechas.</p>
+                        <a href="#" class="btn btn-warning">Generar Informes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Gestión de Pacientes -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Gestión de Pacientes</h5>
+                        <p class="card-text">Registre y controle las atenciones de los pacientes(Médico).</p>
+                        <a href="./Medico/Gestion_pacientes.html" class="btn btn-danger">Gestionar Pacientes</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Configuración -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">Configuración</h5>
+                        <p class="card-text">Ajuste las preferencias del sistema y la seguridad.</p>
+                        <a href="#" class="btn btn-info">Ir a Configuración</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p class="mb-0">© 2024 Centro Médico Galenos. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

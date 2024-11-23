@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar una Hora - Fecha y Hora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/TomaHora.css">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../homepageP.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mis Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TomaHoraCentro.html">Reservar Hora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Login.html">Mi Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Encabezado -->
+    <header class="bg-light text-center py-4">
+        <h1 class="display-6">Seleccionar Fecha y Hora</h1>
+        <p class="lead">Elija una fecha y una hora para su reserva</p>
+    </header>
+
+    <div class="container my-5">
+        <!-- Títulos de los Pasos -->
+        <div class="mb-4 text-center">
+            <span class="step-title step-future">Elegir Centro Médico y Especialidad</span> |
+            <span class="step-title step-future">Médico</span> |
+            <span class="step-title step-current">Fecha y Hora</span>
+        </div>
+
+        <!-- Calendario -->
+        <div class="calendar-container" id="calendarContainer">
+            
+        </div>
+
+        <!-- Información del Médico -->
+        <div class="doctor-info" id="doctorInfo">
+            <!-- Eliminar los placeholder, solo estaba probando como se veían -->
+            <img src="https://via.placeholder.com/80" alt="Foto del Médico" id="doctorPhoto">
+            <div>
+                <h5 id="doctorName">Dr. Placeholder</h5>
+            </div>
+            
+        </div>
+
+        <!-- Botones de Hora -->
+        <div class="hour-buttons" id="hourButtons">
+            
+        </div>
+
+        <!-- Botón para Confirmar -->
+        <div class="d-grid mt-4">
+            <button type="button" class="btn btn-primary" id="btnConfirmar" disabled>Confirmar Reserva</button>
+        </div>
+    </div>
+
+    <script>
+        // Información del médico seleccionada previamente (simulada)
+        const doctor = {
+            id: 1,
+            nombre: "Dr. Placeholder",
+            foto: "https://via.placeholder.com/80"
+        };
+
+        // Inicialización de elementos
+        const calendarContainer = document.getElementById('calendarContainer');
+        const doctorPhoto = document.getElementById('doctorPhoto');
+        const doctorName = document.getElementById('doctorName');
+        const hourButtons = document.getElementById('hourButtons');
+        const btnConfirmar = document.getElementById('btnConfirmar');
+
+        // Mostrar información del médico
+        doctorPhoto.src = doctor.foto;
+        doctorName.textContent = doctor.nombre;
+
+        // Generar calendario
+        function generateCalendar() {
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setMonth(maxDate.getMonth() + 3);
+
+            const calendar = document.createElement('table');
+            calendar.classList.add('table', 'table-bordered', 'calendar');
+            const header = document.createElement('thead');
+            header.innerHTML = `
+                <tr>
+                    <th>Lun</th>
+                    <th>Mar</th>
+                    <th>Mié</th>
+                    <th>Jue</th>
+                    <th>Vie</th>
+                    <th>Sáb</th>
+                    <th>Dom</th>
+                </tr>
+            `;
+            calendar.appendChild(header);
+
+            const body = document.createElement('tbody');
+            let currentDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+            while (currentDate <= maxDate) {
+                const row = document.createElement('tr');
+                for (let i = 0; i < 7; i++) {
+                    const cell = document.createElement('td');
+                    if (currentDate.getDay() === i && currentDate <= maxDate) {
+                        cell.textContent = currentDate.getDate();
+                        cell.dataset.date = currentDate.toISOString().split('T')[0];
+                        cell.addEventListener('click', () => handleDateSelection(cell));
+                        currentDate.setDate(currentDate.getDate() + 1);
+                    }
+                    row.appendChild(cell);
+                }
+                body.appendChild(row);
+            }
+            calendar.appendChild(body);
+            calendarContainer.appendChild(calendar);
+        }
+
+        // Manejar selección de fecha
+        function handleDateSelection(cell) {
+            document.querySelectorAll('.calendar td').forEach(td => td.classList.remove('selected'));
+            cell.classList.add('selected');
+            const date = cell.dataset.date;
+            console.log('Fecha seleccionada:', date);
+            loadAvailableHours(date);
+        }
+
+        // Cargar horas disponibles para una fecha seleccionada
+        function loadAvailableHours(date) {
+            // Simular horas disponibles
+            const availableHours = ["09:00", "10:00", "11:00", "14:00", "15:00"];
+            hourButtons.innerHTML = '';
+
+            availableHours.forEach(hour => {
+                const button = document.createElement('button');
+                button.classList.add('btn', 'btn-outline-primary');
+                button.textContent = hour;
+                button.addEventListener('click', () => handleHourSelection(hour));
+                hourButtons.appendChild(button);
+            });
+        }
+
+        // Manejar selección de hora
+        function handleHourSelection(hour) {
+            console.log('Hora seleccionada:', hour);
+            btnConfirmar.disabled = false;
+        }
+
+        // Inicializar página
+        generateCalendar();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

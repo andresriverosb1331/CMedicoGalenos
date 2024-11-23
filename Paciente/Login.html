@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/Login.css">
+    <style>
+
+    </style>
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="homepageP.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mis Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TomaHora/TomaHoraCentro.html">Reservar Hora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Login.html">Mi Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Contenedor del Login -->
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Iniciar Sesión</h1>
+                <p class="text-muted">Ingrese sus credenciales para continuar</p>
+            </div>
+            <!-- Formulario -->
+            <form id="loginForm">
+                <!-- Campo de Rut -->
+                <label for="Rut">RUT</label><br/>
+                <small>Formato: 12.345.678-9</small>
+                <input type="text" class="form-control" id="Rut" placeholder="" required>
+                <!-- Campo de Contraseña -->
+                <label for="Rut">Contraseña</label><br/>
+                <input type="password" class="form-control" id="Contraseña" placeholder="" required>
+                <!-- Botón de Iniciar Sesión -->
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            </form>
+            <!-- Footer con enlaces -->
+            <div class="login-footer">
+                <p>
+                    ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+                </p>
+                <p>
+                    ¿Olvidaste tu contraseña? <a href="restablecer.html">Restablécela aquí</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manejo del formulario de login
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            // Obtener valores de los campos
+            const rut = document.getElementById('Rut').value;
+            const password = document.getElementById('Contraseña').value;
+
+            console.log('Rut:', rut);
+            console.log('Contraseña:', password);
+
+            // Aquí puedes integrar la lógica de conexión con el backend
+            // Enviar datos al servidor para validar las credenciales
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

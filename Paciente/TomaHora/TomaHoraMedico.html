@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar una Hora - Selección de Médico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/TomaHora.css">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../homepageP.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mis Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TomaHoraCentro.html">Reservar Hora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Login.html">Mi Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Encabezado -->
+    <header class="bg-light text-center py-4">
+        <h1 class="display-6">Seleccionar Médico</h1>
+        <p class="lead">Elija un médico para continuar con su reserva</p>
+    </header>
+
+    <div class="container my-5">
+        <!-- Títulos de los Pasos -->
+        <div class="mb-4 text-center">
+            <span class="step-title step-future">Elegir Centro Médico y Especialidad</span> |
+            <span class="step-title step-current">Médico</span> |
+            <span class="step-title step-future">Fecha y Hora</span>
+        </div>
+
+        <!-- Contenedor de Médicos -->
+        <div class="row" id="medicosContainer">
+            <!-- Eliminar los placeholder, solo estaba probando como se veían -->
+            <!-- Placeholder 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="doctor-card">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Médico" class="doctor-img">
+                    <div class="doctor-name">Dr. Placeholder 1</div>
+                </div>
+            </div>
+            <!-- Placeholder 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="doctor-card">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Médico" class="doctor-img">
+                    <div class="doctor-name">Dra. Placeholder 2</div>
+                </div>
+            </div>
+            <!-- Placeholder 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="doctor-card">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Médico" class="doctor-img">
+                    <div class="doctor-name">Dr. Placeholder 3</div>
+                </div>
+            </div>
+            <!-- Placeholder 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="doctor-card">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Médico" class="doctor-img">
+                    <div class="doctor-name">Dra. Placeholder 4</div>
+                </div>
+            </div>
+            <!-- Placeholder 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="doctor-card">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Médico" class="doctor-img">
+                    <div class="doctor-name">Dr. Placeholder 5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para Continuar -->
+        <div class="d-grid mt-4">
+            <button type="button" class="btn btn-primary" id="btnContinuar" disabled>Continuar</button>
+        </div>
+    </div>
+
+    <script>
+        // URL base del backend 
+        const apiBaseURL = '';
+
+        // Elementos del DOM
+        const medicosContainer = document.getElementById('medicosContainer');
+        const btnContinuar = document.getElementById('btnContinuar');
+        let selectedDoctorId = null;
+
+        // Función para cargar los médicos desde el backend
+        async function cargarMedicos(especialidadId) {
+            const response = await fetch(`${apiBaseURL}/medicos?especialidad=${especialidadId}`);
+            const medicos = await response.json();
+
+            // Limpiar contenedor
+            medicosContainer.innerHTML = '';
+
+            // Crear tarjetas para cada médico
+            medicos.forEach(medico => {
+                const card = document.createElement('div');
+                card.classList.add('col-md-4', 'mb-4', 'doctor-card');
+                card.dataset.id = medico.id;
+
+                // Estructura de la tarjeta
+                card.innerHTML = `
+                    <img src="https://via.placeholder.com/150" alt="Foto de ${medico.nombre}" class="doctor-img">
+                    <div class="doctor-name">${medico.nombre}</div>
+                `;
+
+                // Evento para seleccionar la tarjeta
+                card.addEventListener('click', () => {
+                    // Desmarcar todas las tarjetas
+                    document.querySelectorAll('.doctor-card').forEach(c => c.classList.remove('selected'));
+
+                    // Marcar la tarjeta seleccionada
+                    card.classList.add('selected');
+
+                    // Guardar el ID del médico seleccionado y habilitar el botón
+                    selectedDoctorId = medico.id;
+                    btnContinuar.disabled = false;
+                });
+
+                // Agregar la tarjeta al contenedor
+                medicosContainer.appendChild(card);
+            });
+        }
+
+        // Evento del botón Continuar
+        btnContinuar.addEventListener('click', () => {
+            if (selectedDoctorId) {
+                console.log('Médico seleccionado:', selectedDoctorId);
+
+            }
+        });
+
+        // Simular carga inicial (reemplaza con el ID real de la especialidad seleccionada)
+        const especialidadId = 1; // Cambiar dinámicamente según el paso anterior
+        cargarMedicos(especialidadId);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

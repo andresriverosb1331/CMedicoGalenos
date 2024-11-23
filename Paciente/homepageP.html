@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Pacientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="homepageP.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mis Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TomaHora/TomaHoraCentro.html">Reservar Hora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Login.html">Mi Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="bg-light text-center py-5">
+        <h1 class="display-4">Bienvenido, Paciente</h1>
+        <p class="lead">Gestione sus horas médicas de forma rápida y sencilla.</p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Próximas Citas -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Próximas Atenciones</h5>
+                        <p class="card-text">Revise la información de sus próximas citas médicas.</p>
+                        <a href="#" class="btn btn-primary">Ver Mis Reservas</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Reservar Hora -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Reservar Nueva Hora</h5>
+                        <p class="card-text">Elija un centro, médico, y fecha para su próxima atención.</p>
+                        <a href="#" class="btn btn-success">Reservar Hora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Información del Centro -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Información del Centro</h5>
+                        <p class="card-text">Conozca la ubicación, horarios y contacto de nuestro centro médico.</p>
+                        <a href="#" class="btn btn-warning">Ver Información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Ayuda y Soporte -->
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Ayuda y Soporte</h5>
+                        <p class="card-text">¿Tiene dudas? Contáctenos para obtener asistencia.</p>
+                        <a href="#" class="btn btn-danger">Contactar Soporte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p class="mb-0">© 2024 Centro Médico Galenos. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

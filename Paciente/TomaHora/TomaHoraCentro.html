@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar una Hora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/TomaHora.css">
+</head>
+<body>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Centro Médico Galenos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../homepageP.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mis Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TomaHoraCentro.html">Reservar Hora</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Login.html">Mi Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Encabezado -->
+    <header class="bg-light text-center py-4">
+        <h1 class="display-6">Reservar una Hora</h1>
+        <p class="lead">Sigue los pasos para reservar tu hora médica</p>
+    </header>
+
+    <div class="container my-5">
+        <!-- Títulos de los Pasos -->
+        <div class="mb-4 text-center">
+            <span class="step-title step-current">Elegir Centro Médico y Especialidad</span> |
+            <span class="step-title step-future">Médico</span> |
+            <span class="step-title step-future">Fecha y Hora</span>
+        </div>
+
+        <!-- Formulario -->
+        <form id="formPaso1">
+            <!-- Selección de Centro Médico -->
+            <div class="mb-4">
+                <label for="centroMedico" class="form-label">Seleccione el Centro Médico</label>
+                <select class="form-select" id="centroMedico" required>
+                    <option value="" disabled selected>Elija un centro</option>
+                    <!-- Los valores serán cargados dinámicamente desde el backend -->
+                </select>
+            </div>
+
+            <!-- Selección de Especialidad -->
+            <div class="mb-4">
+                <label for="especialidad" class="form-label">Seleccione la Especialidad</label>
+                <select class="form-select" id="especialidad" required disabled>
+                    <option value="" disabled selected>Elija una especialidad</option>
+                    <!-- Los valores serán cargados dinámicamente desde el backend -->
+                </select>
+            </div>
+
+            <!-- Botón para Continuar -->
+            <div class="d-grid">
+                <button type="button" class="btn btn-primary" id="btnContinuar" disabled>Continuar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // URL base del backend (reemplaza con tu URL real)
+        const apiBaseURL = 'https://mi-backend.com/api';
+
+        // Elementos del formulario
+        const centroMedico = document.getElementById('centroMedico');
+        const especialidad = document.getElementById('especialidad');
+        const btnContinuar = document.getElementById('btnContinuar');
+
+        // Función para cargar los centros médicos desde el backend
+        async function cargarCentros() {
+            const response = await fetch(`${apiBaseURL}/centros`);
+            const centros = await response.json();
+            centros.forEach(centro => {
+                const option = document.createElement('option');
+                option.value = centro.id;
+                option.textContent = centro.nombre;
+                centroMedico.appendChild(option);
+            });
+        }
+
+        // Evento al seleccionar un centro médico
+        centroMedico.addEventListener('change', async () => {
+            especialidad.disabled = true;
+            btnContinuar.disabled = true;
+
+            // Cargar especialidades según el centro seleccionado
+            const centroId = centroMedico.value;
+            const response = await fetch(`${apiBaseURL}/especialidades?centro=${centroId}`);
+            const especialidades = await response.json();
+            especialidad.innerHTML = '<option value="" disabled selected>Elija una especialidad</option>';
+            especialidades.forEach(especialidadData => {
+                const option = document.createElement('option');
+                option.value = especialidadData.id;
+                option.textContent = especialidadData.nombre;
+                especialidad.appendChild(option);
+            });
+            especialidad.disabled = false;
+        });
+
+        // Evento al seleccionar una especialidad
+        especialidad.addEventListener('change', () => {
+            btnContinuar.disabled = false;
+        });
+
+        // Cargar los datos iniciales
+        cargarCentros();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
